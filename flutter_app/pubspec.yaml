@@ -1,5 +1,5 @@
-name: piecho_ui
-description: Thin kiosk UI for PiEcho
+name: nova_ui
+description: Thin kiosk UI for Nova
 environment:
   sdk: ">=3.4.0 <4.0.0"
 dependencies:

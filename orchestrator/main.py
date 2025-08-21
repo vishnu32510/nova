@@ -1,4 +1,5 @@
 import json
+import os, httpx
 from fastapi import FastAPI, WebSocket
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -9,9 +10,20 @@ app = FastAPI()
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_credentials=True,
                    allow_methods=["*"], allow_headers=["*"])
 
+LLAMA_HEALTH = os.getenv("LLAMA_HEALTH", "http://127.0.0.1:8080/health")
+
 @app.get("/health")
 def health():
     return {"ok": True}
+
+@app.get("/llm")
+async def llm_health():
+    try:
+        async with httpx.AsyncClient(timeout=3) as c:
+            r = await c.get(LLAMA_HEALTH)
+            return {"ok": r.status_code == 200}
+    except Exception as e:
+        return {"ok": False, "error": str(e)}
 
 @app.websocket("/ws")
 async def ws(ws: WebSocket):

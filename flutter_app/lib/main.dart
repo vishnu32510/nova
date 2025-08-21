@@ -23,23 +23,25 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(title: const Text('PiEcho')),
-        body: Column(children: [
-          Expanded(child: ListView(
-            children: events.map((e) => ListTile(
-              title: Text(e['type'] ?? 'event'),
-              subtitle: Text(const JsonEncoder.withIndent('  ').convert(e)),
-            )).toList(),
-          )),
-          Row(children: [
-            Expanded(child: TextField(controller: ctrl, decoration: const InputDecoration(hintText: 'Say something'))),
-            IconButton(icon: const Icon(Icons.send), onPressed: () {
-              final msg = jsonEncode({"type":"user_text", "text": ctrl.text});
-              ch.sink.add(msg); ctrl.clear();
-            })
-          ])
-        ]),
+      home: SelectionArea(
+        child: Scaffold(
+          appBar: AppBar(title: const Text('Nova')),
+          body: Column(children: [
+            Expanded(child: ListView(
+              children: events.map((e) => ListTile(
+                title: SelectableText(e['type'] ?? 'event'),
+                subtitle: SelectableText(const JsonEncoder.withIndent('  ').convert(e)),
+              )).toList(),
+            )),
+            Row(children: [
+              Expanded(child: TextField(controller: ctrl, decoration: const InputDecoration(hintText: 'Say something'))),
+              IconButton(icon: const Icon(Icons.send), onPressed: () {
+                final msg = jsonEncode({"type":"user_text", "text": ctrl.text});
+                ch.sink.add(msg); ctrl.clear();
+              })
+            ])
+          ]),
+        ),
       ),
     );
   }

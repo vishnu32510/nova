@@ -1,12 +1,12 @@
 [Unit]
-Description=PiEcho Orchestrator
+Description=Nova Orchestrator
 After=network-online.target
 Wants=network-online.target
 
 [Service]
 Type=simple
-WorkingDirectory=/home/pi/piecho/orchestrator
-ExecStart=/home/pi/piecho/orchestrator/.venv/bin/uvicorn main:app --host 0.0.0.0 --port 8000
+WorkingDirectory=/home/pi/nova/orchestrator
+ExecStart=/home/pi/nova/orchestrator/.venv/bin/uvicorn main:app --host 0.0.0.0 --port 8000
 Restart=always
 RestartSec=2
 

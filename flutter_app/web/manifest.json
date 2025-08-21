@@ -1,6 +1,6 @@
 {
-    "name": "piecho_ui",
-    "short_name": "piecho_ui",
+    "name": "nova_ui",
+    "short_name": "nova_ui",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
