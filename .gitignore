@@ -9,3 +9,8 @@
 /orchestrator/models/
 /orchestrator/env/
 /orchestrator/venv/
+/orchestrator/__pycache__/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
