@@ -12,6 +12,9 @@ app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_credentials=True,
 
 LLAMA_HEALTH = os.getenv("LLAMA_HEALTH", "http://127.0.0.1:8080/health")
 
+from fastapi.staticfiles import StaticFiles
+app.mount("/", StaticFiles(directory="../flutter_web", html=True), name="ui")
+
 @app.get("/health")
 def health():
     return {"ok": True}
